@@ -1,12 +1,14 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        hash_map = dict() # value: idx
+        hash_map = dict()
+        
+        for i in range(len(nums)):
+            value = nums[i]
+            need_to_find = target - value
 
-        for idx, n in enumerate(nums):
-            need_to_find = target - n
-
-            # NOTE: numbers can be dict key in python
             if need_to_find in hash_map:
-                return (idx, hash_map[need_to_find])
+                return [hash_map[need_to_find], i]
             else:
-                hash_map[n] = idx
+                hash_map[value] = i
+                
+                
