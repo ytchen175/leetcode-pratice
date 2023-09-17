@@ -9,7 +9,7 @@ class Solution:
             if (out_of_index) or (out_of_index2) or (grid[row][col] != '1'):
                 return
             else:
-                grid[row][col] = '#'
+                grid[row][col] = '#' # had visited
 
                 dfs(grid, row, col - 1) # 向左探索
                 dfs(grid, row, col + 1) # 向右探索
@@ -23,6 +23,6 @@ class Solution:
                 for col in range(len(grid[0])):
                     if grid[row][col] == '1': # start to find island
                         dfs(grid, row, col)
-                        island_count += 1
+                        island_count += 1 # 不管 island 有多大，總之一定是一塊
 
         return island_count
