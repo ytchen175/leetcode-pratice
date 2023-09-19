@@ -12,11 +12,11 @@ class Trie:
 
         for w in word:
             if w not in curr.childrens:
-                curr.childrens[w] = TrieNode()
-                curr = curr.childrens[w]
+                curr.childrens[w] = TrieNode() # {"a": TrieNode()}
+                curr = curr.childrens[w] # move to next character node, eg. get into a's TrieNode 
             else:
-                curr = curr.childrens[w]
-        curr.end_of_word = True
+                curr = curr.childrens[w] # move to next character node, eg. get into a's TrieNode 
+        curr.end_of_word = True # set last node as the end_of_word (EOW)
 
     def search(self, word: str) -> bool:
         curr = self.root
@@ -27,7 +27,7 @@ class Trie:
             else:
                 curr = curr.childrens[w]
 
-        return curr.end_of_word
+        return curr.end_of_word # if last node is not end_of_word then False, else True 
 
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
@@ -37,7 +37,7 @@ class Trie:
                 return False
             else:
                 curr = curr.childrens[w]
-        return True
+        return True # whether last node is or is not end_of_word, return True
 
 
 # Your Trie object will be instantiated and called as such:
