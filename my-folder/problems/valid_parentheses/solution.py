@@ -1,22 +1,27 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-
-        vaild_hash_map = {
-            '(': ')',
-            '{': '}',
-            '[': ']'
+        sign_map = {
+            ')': '(',
+            ']': '[',
+            '}': '{'
         }
 
         for i in s:
-            if i in vaild_hash_map: # push left paretheses in stack
+            stop_condition = (i == ")" or i == '}' or i == ']')
+
+            if not stop_condition:
                 stack.append(i)
-            elif (len(stack) != 0) and (i == vaild_hash_map[stack[-1]]): # peek most upper element in stack
-                stack.pop()
             else:
-                return False # parentheses not match
+                if not stack: # eg. "}{"
+                    return False
+                else:
+                    left_sign = stack.pop() # 因為不把右括號 append 進去所以都是左括號
 
-        if len(stack) != 0: # still some paretheses in stack, that's not we expected
+                if sign_map[i] != left_sign: # 對照回 map
+                    return False
+
+        if stack:
             return False
-
-        return True
+        else:
+            return True
