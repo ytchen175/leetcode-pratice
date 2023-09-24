@@ -10,20 +10,21 @@ from typing import Optional
 
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        old_to_new_hash_map = dict()
+        old_to_new_hash_map = dict() # for old and new node mappings 
 
         def dfs(node):
             if node in old_to_new_hash_map:
                 return old_to_new_hash_map[node]
+            else:
+                new_graph = Node(node.val)
+                old_to_new_hash_map[node] = new_graph
 
-            new_graph = Node(node.val)
-            old_to_new_hash_map[node] = new_graph
+                for neigh in node.neighbors:
+                    new_graph.neighbors.append(dfs(neigh))
 
-            for neigh in node.neighbors:
-                new_graph.neighbors.append(dfs(neigh))
+                return new_graph
 
-            return new_graph
-
+        # main
         if not node:
             return None
         else:
