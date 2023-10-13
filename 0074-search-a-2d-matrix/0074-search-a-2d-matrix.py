@@ -14,9 +14,7 @@ class Solution:
                 elif matrix[mid][0] > target: # mid row 的第一個元素比 target 大
                     bottom = mid - 1 # 代表 target 在上面
                 else:
-                    # matrix[mid][-1] >= target or matrix[mid][0] <= target
-                    # 代表 target 要在 matrix[mid] 這條找
-                    return mid
+                    return mid # 代表 target 要在 matrix[mid] 這條找 (且扣除頭尾)
 
             return -1
 
@@ -40,3 +38,4 @@ class Solution:
                 left = mid + 1
 
         return False
+
