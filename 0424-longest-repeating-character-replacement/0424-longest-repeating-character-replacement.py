@@ -6,11 +6,11 @@ class Solution:
         left = 0
         
         for right in range(len(s)):
-            # if s[right] not in char_freq_map:
-            #     char_freq_map[s[right]] = 1
-            # else:
-            #     char_freq_map[s[right]] += 1
-            char_freq_map[s[right]] = 1 + char_freq_map.get(s[right], 0)
+            if s[right] not in char_freq_map:
+                char_freq_map[s[right]] = 1
+            else:
+                char_freq_map[s[right]] += 1
+            # char_freq_map[s[right]] = 1 + char_freq_map.get(s[right], 0)
             
             # max_window_size - max_freq <= k 才是 vaild 的 window size
             # current_window_size = right - left + 1
