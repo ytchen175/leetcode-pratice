@@ -8,7 +8,6 @@ class Solution:
                (grid[row][col] == 0) or (grid[row][col] == '#'):
                 return 0
             else:
-                # visited.add((row, col))
                 grid[row][col] = '#'
 
                 return (
