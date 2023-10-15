@@ -1,27 +1,24 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        ROWS, COLS = len(grid), len(grid[0])
         island_count = 0
-
-        def dfs(grid, row, col):
-            stop_condition = (row < 0 or col < 0) or (row >= ROWS or col >= COLS)
-            if (stop_condition) or (grid[row][col] != '1'):
+        
+        def dfs(row, col, grid):
+            if (row < 0) or (col < 0) or \
+               (row > len(grid) - 1) or (col > len(grid[0]) - 1) or \
+               (grid[row][col] == '0') or (grid[row][col] == '#'):
                 return
             else:
-                grid[row][col] = '#' # visited
-                
-                dfs(grid, row - 1, col) # 向上
-                dfs(grid, row + 1, col) # 向下
-                dfs(grid, row, col - 1) # 向左
-                dfs(grid, row, col + 1) # 向右
+                grid[row][col] = '#'
+            
+                dfs(row - 1, col, grid) # up
+                dfs(row + 1, col, grid) # down
+                dfs(row, col - 1, grid) # left
+                dfs(row, col + 1, grid) # down
+        
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if grid[row][col] == '1':
+                    island_count += 1
+                    dfs(row, col, grid)
 
-        if not grid:
-            return 0
-        else:
-            for row in range(ROWS):
-                for col in range(COLS):
-                    if grid[row][col] == '1': # start to find island
-                        dfs(grid, row, col)
-                        island_count += 1 # 不管 island 有多大，總之一定是一塊
-
-            return island_count
+        return island_count
