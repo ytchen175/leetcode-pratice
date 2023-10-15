@@ -10,18 +10,17 @@ class Solution:
                 char_freq_map[s[right]] = 1
             else:
                 char_freq_map[s[right]] += 1
-            # char_freq_map[s[right]] = 1 + char_freq_map.get(s[right], 0)
             
             # max_window_size - max_freq <= k 才是 vaild 的 window size
             # current_window_size = right - left + 1
             # max_freq = max(char_freq_map.values())
-            
+            # 不曉得為什麼先把上面兩個變數抽出來會噴 error，但概念是這樣的
+
             # while (current_window_size - max_freq > k):
             while (right - left + 1) - max(char_freq_map.values()) > k:
                 char_freq_map[s[left]] -= 1
                 left += 1
 
-            # max_window_size = max(current_window_size, max_window_size)
             max_window_size = max(max_window_size, right - left + 1)
 
         return max_window_size
