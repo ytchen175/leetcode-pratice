@@ -23,16 +23,30 @@
 #                 return nums[p] # 正好是要找的第 k 個 largest 元素
 
 #         return quickSelect(0, len(nums) - 1)
-from heapq import heapify, heappush, heappushpop
-class Solution: ## complexity nlogk
-    def findKthLargest(self, nums: List[int], k: int) -> int:            
-        x = nums[:k]              
-        heapify(x)
+
+# from heapq import heapify, heappush, heappushpop
+# class Solution: ## complexity nlogk
+#     def findKthLargest(self, nums: List[int], k: int) -> int:            
+#         x = nums[:k]              
+#         heapify(x)
         
             
-        while(len(nums) > k):
-            heappushpop(x, nums[k])            
-            k += 1
-        return x[0]
+#         while(len(nums) > k):
+#             heappushpop(x, nums[k])            
+#             k += 1
+#         return x[0]
+from heapq import heappush, heappop
 
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        pq = []
+        for i in range(k):
+            heappush(pq, nums[i])
+        
+        for i in range(k, len(nums)):
+            if pq[0] < nums[i]:
+                heappop(pq)
+                heappush(pq, nums[i])
+        
+        return heappop(pq)
     
