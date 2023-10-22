@@ -8,22 +8,23 @@ class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
         res = []
 
+        if not root:
+            return
+        
         def dfs(node, path, res):
             if not node:
                 return
             else:
-                path += str(node.val) # append node.val to the current path
-
-                if (not node.left) and (not node.right): # if this node is a leaf node
-                    res.append(path) # this path is vaild, append path into res  
-                    return
+                path += str(node.val)
                 
-                # there are still some nodes, add path + '->' and call recursively
+                if (not node.left) and (not node.right):
+                    res.append(path)
+                
                 if node.left:
-                    dfs(node.left, path + '->', res)
+                    dfs(node.left, path + "->", res)
                 if node.right:
-                    dfs(node.right, path + '->', res)
-
-        dfs(root, '', res)
-
-        return res
+                    dfs(node.right, path + "->", res)
+        
+        dfs(root, "", res)
+                
+        return res 
