@@ -8,9 +8,8 @@ class Solution:
             return False
 
         for i in t:
-            if j == len(s):
-                return True
-            elif j < len(s) and i == s[j]:
+
+            if j < len(s) and i == s[j]:
                 j += 1
 
         return j == len(s)
