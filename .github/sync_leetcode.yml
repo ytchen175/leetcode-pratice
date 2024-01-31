@@ -19,3 +19,4 @@ jobs:
           destination-folder: my-folder
           verbose: true
           commit-header: '[LeetCode Sync]'
+
