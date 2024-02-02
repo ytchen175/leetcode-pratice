@@ -4,12 +4,12 @@ class Solution:
         max_profit = 0
         
         while left < right and right < len(prices):
-            profit = prices[right] - prices[left]
-            
-            if prices[left] > prices[right]:
-                left = right
+            curr_profit = prices[right] - prices[left]
+
+            if curr_profit > 0:
+                max_profit = max(max_profit, curr_profit)
             else:
-                max_profit = max(max_profit, profit)
+                left = right
             right += 1
-            
+
         return max_profit
