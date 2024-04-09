@@ -7,25 +7,23 @@ class Node:
 """
 
 from typing import Optional
-
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        old_to_new_hash_map = dict() # visited hash map, for old and new node mappings 
-
-        def dfs(node):
-            if node in old_to_new_hash_map: # have visited
-                return old_to_new_hash_map[node] # return new one
+        old_to_new_dict = dict()
+        
+        def clone(node):
+            if node in old_to_new_dict:
+                return old_to_new_dict[node]
             else:
-                new_graph = Node(node.val) # copy old node.val
-                old_to_new_hash_map[node] = new_graph # add mappings
+                new_node = Node(node.val)
+                old_to_new_dict[node] = new_node
+                
+                for neighbor in node.neighbors:
+                    new_node.neighbors.append(clone(neighbor))
+                
+                return new_node
 
-                for neigh in node.neighbors:
-                    new_graph.neighbors.append(dfs(neigh)) # search and append new node
-
-                return new_graph
-
-        # main
-        if not node:
-            return None
+        if node:
+            return clone(node)
         else:
-            return dfs(node)
+            return None
